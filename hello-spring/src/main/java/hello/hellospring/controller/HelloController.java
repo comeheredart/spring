@@ -3,6 +3,7 @@ package hello.hellospring.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class HelloController {
@@ -23,6 +24,15 @@ public class HelloController {
         //그럼 모델이랑 같이 넘기나 보지? 그래서 data 를 출력할 수 있는 것!
         return "hello";
     }
+
+    @GetMapping("hello-mvc")
+    public String helloMvc(@RequestParam("name") String name, Model model) {
+        //외부에서 파라미터를 받는 것, 그리고 모델 담아주기
+        model.addAttribute("name", name);
+        return "hello-template";
+    }
+
+
 }
 
 //빌드하고 실행하기 : .jar 파일이 있는데 걔만 서버에 넣고 실행시키면 서버가 돌아가는 걸 볼 수 있다.
