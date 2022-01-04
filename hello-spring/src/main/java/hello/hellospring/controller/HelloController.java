@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HelloController {
@@ -32,6 +33,36 @@ public class HelloController {
         return "hello-template";
     }
 
+    @GetMapping("hello-string")
+    @ResponseBody
+    //중요한 것! http에 헤더/바디가 있는데 (통신 프로토콜) 바디부에 응답 데이터를 내가 직접 넣어주겠다
+    public String helloString(@RequestParam("name") String name) {
+        return "hello" + name; //spring 이라고 들어오면 hello spring 이라고 요청한 클라이언트에 그대로 내려가게 된다.
+    }
+
+
+    @GetMapping("hello-api")
+    @ResponseBody
+    public Hello helloApi(@RequestParam("name") String name) {
+        //자동완성 단축키 커맨트쉬프트엔터
+        Hello hello = new Hello();
+        hello.setName(name);
+        return hello;
+    }
+
+
+    static class Hello {
+        private String name;
+
+        //단축키 컨트롤+엔터
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
 
 }
 
