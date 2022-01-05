@@ -39,4 +39,8 @@ public class MemoryMemberRepository implements MemberRepository {
         //전체 회원을 반환. member 들을 반환한다.
     }
 
+    public void clearStore() {
+        store.clear();
+    }
+
 }
